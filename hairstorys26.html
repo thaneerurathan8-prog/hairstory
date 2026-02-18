@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hair Story's – The Unisex Salon | Hyderabad</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --gold: #D4AF37;
+  --gold-light: #f0d060;
+  --gold-dark: #a88b1f;
+  --black: #000000;
+  --dark: #0a0a0a;
+  --dark2: #111111;
+  --dark3: #1a1a1a;
+  --dark4: #222222;
+  --white: #ffffff;
+  --grey: #888888;
+  --grey-light: #cccccc;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom cursor */
+.cursor {
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 99999;
+  transition: transform 0.1s ease;
+}
+.cursor-ring {
+  width: 32px; height: 32px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 99998;
+  transition: transform 0.15s ease, opacity 0.3s;
+  opacity: 0.6;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+/* ======== HEADER ======== */
+header {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0 5%;
+  height: 70px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212,175,55,0.15);
+  transition: all 0.4s ease;
+}
+header.scrolled {
+  height: 60px;
+  background: rgba(0,0,0,0.97);
+  border-bottom-color: rgba(212,175,55,0.3);
+}
+
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 1.1;
+}
+.logo span { font-size: 0.55rem; display: block; letter-spacing: 5px; color: var(--grey-light); font-family: 'Montserrat', sans-serif; font-weight: 300; text-transform: uppercase; }
+
+nav { display: flex; gap: 2rem; align-items: center; }
+nav a {
+  color: var(--grey-light);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+nav a::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px; background: var(--gold);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform 0.3s ease;
+}
+nav a:hover { color: var(--gold); }
+nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+nav a.active { color: var(--gold); }
+nav a.active::after { transform: scaleX(1); }
+
+.nav-cta {
+  background: var(--gold);
+  color: var(--black) !important;
+  padding: 8px 18px;
+  border-radius: 2px;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  transition: background 0.3s, transform 0.2s !important;
+}
+.nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px) !important; }
+.nav-cta::after { display: none !important; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 1.5px;
+  background: var(--gold);
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-nav {
+  display: none;
+  position: fixed; top: 70px; left: 0; right: 0;
+  background: rgba(0,0,0,0.97);
+  backdrop-filter: blur(20px);
+  padding: 2rem;
+  z-index: 999;
+  flex-direction: column; gap: 1.5rem;
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+  transform: translateY(-100%);
+  transition: transform 0.4s ease;
+}
+.mobile-nav.open { display: flex; transform: translateY(0); }
+.mobile-nav a {
+  color: var(--grey-light);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(212,175,55,0.1);
+  transition: color 0.3s;
+  cursor: pointer;
+}
+.mobile-nav a:hover, .mobile-nav a.active { color: var(--gold); }
+
+/* ======== PAGES ======== */
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ======== HOME PAGE ======== */
+#hero {
+  height: 100vh;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.05) 0%, transparent 50%),
+    linear-gradient(180deg, #000 0%, #0d0d0d 100%);
+}
+
+/* Animated gold lines */
+.hero-lines {
+  position: absolute; inset: 0; overflow: hidden;
+}
+.hero-line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  height: 1px; opacity: 0;
+  animation: lineSweep 4s ease infinite;
+}
+.hero-line:nth-child(1) { top: 25%; width: 60%; left: 20%; animation-delay: 0s; }
+.hero-line:nth-child(2) { top: 50%; width: 40%; left: 30%; animation-delay: 1.5s; }
+.hero-line:nth-child(3) { top: 75%; width: 70%; left: 10%; animation-delay: 3s; }
+
+@keyframes lineSweep {
+  0% { opacity: 0; transform: scaleX(0); transform-origin: left; }
+  30% { opacity: 0.4; transform: scaleX(1); }
+  70% { opacity: 0.4; }
+  100% { opacity: 0; transform: scaleX(0); transform-origin: right; }
+}
+
+/* Floating orbs */
+.orb {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%);
+  animation: orbFloat 8s ease-in-out infinite;
+}
+.orb1 { width: 400px; height: 400px; top: -100px; right: -100px; animation-delay: 0s; }
+.orb2 { width: 300px; height: 300px; bottom: -50px; left: -80px; animation-delay: 3s; }
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(20px, -20px) scale(1.05); }
+}
+
+.hero-content {
+  text-align: center;
+  position: relative; z-index: 2;
+  padding: 0 20px;
+  animation: heroFadeIn 1.2s ease forwards;
+}
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.offer-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  color: var(--black);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 100px;
+  margin-bottom: 2rem;
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(212,175,55,0); }
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 300;
+  line-height: 1.0;
+  margin-bottom: 0.5rem;
+  color: var(--white);
+  letter-spacing: -1px;
+}
+.hero-title .gold { color: var(--gold); font-style: italic; font-weight: 600; }
+
+.hero-divider {
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 1.5rem auto;
+}
+
+.hero-tagline {
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--grey);
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+}
+
+.hero-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: rgba(255,255,255,0.6);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  padding: 14px 36px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.btn-gold::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+.btn-gold:hover::before { transform: translateX(100%); }
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,175,55,0.4); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 14px 36px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-outline:hover { background: var(--gold); color: var(--black); transform: translateY(-2px); }
+
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: scrollBounce 2s ease infinite;
+  cursor: pointer;
+}
+.hero-scroll span { font-size: 0.55rem; letter-spacing: 3px; color: var(--grey); text-transform: uppercase; }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(180deg, transparent, var(--gold)); }
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* Stats */
+.stats-section {
+  background: var(--dark2);
+  padding: 4rem 5%;
+  border-top: 1px solid rgba(212,175,55,0.1);
+  border-bottom: 1px solid rgba(212,175,55,0.1);
+}
+.stats-grid {
+  max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2rem; text-align: center;
+}
+.stat-item { padding: 1rem; }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem; font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-label { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--grey); margin-top: 0.5rem; }
+
+/* Featured services preview */
+.section {
+  padding: 6rem 5%;
+}
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-eyebrow {
+  font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; display: block; margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400; color: var(--white); line-height: 1.1;
+}
+.section-title .gold { color: var(--gold); font-style: italic; }
+.section-line {
+  width: 60px; height: 1px;
+  background: var(--gold);
+  margin: 1.5rem auto;
+}
+.section-sub { font-size: 0.85rem; color: var(--grey); max-width: 500px; margin: 0 auto; line-height: 1.8; }
+
+/* Service cards */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5px;
+  max-width: 1200px; margin: 0 auto;
+  background: rgba(212,175,55,0.1);
+}
+.service-card {
+  background: var(--dark2);
+  padding: 2.5rem;
+  position: relative; overflow: hidden;
+  transition: background 0.4s;
+  cursor: default;
+}
+.service-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px; background: var(--gold);
+  transform: scaleX(0); transition: transform 0.4s;
+}
+.service-card:hover { background: var(--dark3); }
+.service-card:hover::before { transform: scaleX(1); }
+.service-icon {
+  font-size: 2rem; margin-bottom: 1rem;
+  display: block;
+}
+.service-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 600;
+  color: var(--white); margin-bottom: 0.5rem;
+}
+.service-card p { font-size: 0.78rem; color: var(--grey); line-height: 1.8; }
+.service-card-tag {
+  display: inline-block; margin-top: 1rem;
+  font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); border-bottom: 1px solid var(--gold-dark);
+  padding-bottom: 2px;
+}
+
+/* Testimonial */
+.testimonial-section {
+  background: var(--dark2);
+  padding: 6rem 5%;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.testimonial-section::before {
+  content: '"';
+  position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20rem; color: rgba(212,175,55,0.03);
+  line-height: 1; pointer-events: none;
+}
+.testimonial-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 300; font-style: italic;
+  color: rgba(255,255,255,0.8); max-width: 700px; margin: 0 auto 2rem;
+  line-height: 1.6; position: relative; z-index: 1;
+}
+.testimonial-author { font-size: 0.65rem; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; }
+
+/* Brand banner */
+.brand-banner {
+  background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+  padding: 4rem 5%;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.brand-banner::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    45deg, transparent, transparent 20px,
+    rgba(0,0,0,0.03) 20px, rgba(0,0,0,0.03) 21px
+  );
+}
+.brand-banner p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 600; color: var(--black);
+  max-width: 700px; margin: 0 auto 2rem;
+  line-height: 1.5; position: relative;
+}
+.brand-banner .btn-black {
+  background: var(--black); color: var(--gold);
+  border: none; padding: 14px 36px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  cursor: pointer; position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.brand-banner .btn-black:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+/* ======== ABOUT PAGE ======== */
+.about-hero {
+  min-height: 50vh;
+  background: linear-gradient(180deg, var(--black) 0%, var(--dark2) 100%);
+  display: flex; align-items: center;
+  padding: 120px 5% 4rem;
+  position: relative; overflow: hidden;
+}
+.about-hero::after {
+  content: 'STORY';
+  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15rem; font-weight: 700;
+  color: rgba(212,175,55,0.03); line-height: 1;
+  pointer-events: none;
+}
+.about-hero-content { max-width: 600px; }
+.about-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 400; line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.about-hero p { font-size: 0.9rem; color: var(--grey); line-height: 1.9; }
+
+.about-story {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+  padding: 5rem 5%;
+}
+.about-visual {
+  position: relative;
+}
+.about-box {
+  background: var(--dark3);
+  border: 1px solid rgba(212,175,55,0.15);
+  padding: 3rem; text-align: center;
+  position: relative;
+}
+.about-box::before, .about-box::after {
+  content: ''; position: absolute;
+  width: 30px; height: 30px;
+  border-color: var(--gold); border-style: solid;
+}
+.about-box::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.about-box::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+.about-box-icon { font-size: 4rem; margin-bottom: 1rem; display: block; }
+.about-box h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; color: var(--gold); margin-bottom: 0.5rem;
+}
+.about-box p { font-size: 0.78rem; color: var(--grey); line-height: 1.8; }
+
+.about-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 400; margin-bottom: 1.5rem;
+}
+.about-text p { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.9; margin-bottom: 1.5rem; }
+
+/* About cards */
+.about-cards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1px; background: rgba(212,175,55,0.1);
+  max-width: 1100px; margin: 0 auto;
+}
+.about-card {
+  background: var(--dark2);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: background 0.3s;
+  position: relative; overflow: hidden;
+}
+.about-card::before {
+  content: ''; position: absolute;
+  inset: 0; background: linear-gradient(135deg, rgba(212,175,55,0.05), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.about-card:hover { background: var(--dark3); }
+.about-card:hover::before { opacity: 1; }
+.about-card-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+.about-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; color: var(--gold); margin-bottom: 0.5rem;
+}
+.about-card p { font-size: 0.75rem; color: var(--grey); line-height: 1.8; }
+
+/* ======== SERVICES PAGE ======== */
+.page-hero {
+  min-height: 40vh;
+  display: flex; align-items: flex-end;
+  padding: 120px 5% 3rem;
+  background: linear-gradient(180deg, #000 0%, var(--dark2) 100%);
+  position: relative; overflow: hidden;
+}
+.page-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 300; line-height: 1;
+}
+.page-hero h1 em { color: var(--gold); font-style: italic; }
+.page-hero-bg-text {
+  position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(5rem, 15vw, 15rem); font-weight: 700;
+  color: rgba(212,175,55,0.04); line-height: 1;
+  pointer-events: none; letter-spacing: -5px;
+}
+
+.services-full-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5px; background: rgba(212,175,55,0.08);
+  max-width: 1200px; margin: 0 auto 0.1px;
+}
+.service-full-card {
+  background: var(--dark2);
+  padding: 3rem;
+  transition: background 0.3s;
+  position: relative; overflow: hidden;
+}
+.service-full-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0); transform-origin: center;
+  transition: transform 0.4s;
+}
+.service-full-card:hover { background: #151515; }
+.service-full-card:hover::after { transform: scaleX(1); }
+.service-full-card .icon { font-size: 2.5rem; margin-bottom: 1.5rem; display: block; }
+.service-full-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; color: var(--white); margin-bottom: 0.5rem;
+}
+.service-full-card .subtitle { font-size: 0.6rem; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+.service-full-card p { font-size: 0.78rem; color: var(--grey); line-height: 1.9; }
+
+/* ======== MENU PAGE ======== */
+.menu-section { padding: 2rem 5%; }
+.menu-category {
+  max-width: 900px; margin: 0 auto 3rem;
+  border: 1px solid rgba(212,175,55,0.15);
+  overflow: hidden;
+}
+.menu-cat-header {
+  background: linear-gradient(135deg, var(--dark3), var(--dark4));
+  padding: 1.2rem 2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+}
+.menu-cat-header h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; color: var(--gold); font-weight: 600;
+}
+.menu-cat-header span { font-size: 0.6rem; letter-spacing: 3px; color: var(--grey); text-transform: uppercase; }
+.menu-items { padding: 0; }
+.menu-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.2s;
+}
+.menu-item:last-child { border-bottom: none; }
+.menu-item:hover { background: rgba(212,175,55,0.04); }
+.menu-item-left {}
+.menu-item-name { font-size: 0.82rem; color: var(--white); font-weight: 500; }
+.menu-item-sub { font-size: 0.65rem; color: var(--grey); margin-top: 2px; }
+.menu-item-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; color: var(--gold); font-weight: 600;
+  white-space: nowrap; margin-left: 1rem;
+}
+.menu-dots {
+  flex: 1; height: 1px;
+  background: repeating-linear-gradient(90deg, transparent 0, transparent 3px, rgba(212,175,55,0.2) 3px, rgba(212,175,55,0.2) 6px);
+  margin: 0 1rem;
+}
+
+/* ======== BOOKING PAGE ======== */
+.booking-section {
+  padding: 120px 5% 5rem;
+  max-width: 700px; margin: 0 auto;
+}
+.booking-section h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+.booking-section .sub { font-size: 0.75rem; color: var(--grey); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 3rem; }
+
+.booking-form {
+  background: var(--dark2);
+  padding: 3rem;
+  border: 1px solid rgba(212,175,55,0.15);
+  position: relative;
+}
+.booking-form::before, .booking-form::after {
+  content: ''; position: absolute;
+  width: 40px; height: 40px;
+  border-color: var(--gold); border-style: solid;
+}
+.booking-form::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.booking-form::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label {
+  display: block; font-size: 0.6rem; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 0.5rem; font-weight: 600;
+}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%;
+  background: var(--dark3);
+  border: 1px solid rgba(212,175,55,0.15);
+  color: var(--white);
+  padding: 12px 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  -webkit-appearance: none;
+}
+.form-group select option { background: var(--dark3); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.08);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+
+.form-submit {
+  width: 100%;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  padding: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem; font-weight: 800;
+  letter-spacing: 4px; text-transform: uppercase;
+  cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-top: 1rem;
+}
+.form-submit::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+  transform: translateX(-100%); transition: transform 0.6s;
+}
+.form-submit:hover::before { transform: translateX(100%); }
+.form-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,175,55,0.4); }
+
+/* Popup */
+.popup-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  display: none; align-items: center; justify-content: center;
+  backdrop-filter: blur(10px);
+}
+.popup-overlay.active { display: flex; }
+.popup {
+  background: var(--dark2);
+  border: 1px solid rgba(212,175,55,0.3);
+  padding: 3rem;
+  text-align: center;
+  max-width: 450px; width: 90%;
+  position: relative;
+  animation: popupIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes popupIn {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.popup::before, .popup::after {
+  content: ''; position: absolute;
+  width: 30px; height: 30px;
+  border-color: var(--gold); border-style: solid;
+}
+.popup::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.popup::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+.popup-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+.popup h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; color: var(--gold); margin-bottom: 0.5rem;
+}
+.popup p { font-size: 0.8rem; color: var(--grey); line-height: 1.8; margin-bottom: 1.5rem; }
+.popup-close {
+  background: var(--gold); color: var(--black);
+  border: none; padding: 10px 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  cursor: pointer; transition: background 0.3s;
+}
+.popup-close:hover { background: var(--gold-light); }
+
+/* ======== CONTACT PAGE ======== */
+.contact-section {
+  padding: 120px 5% 5rem;
+}
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; max-width: 1100px; margin: 0 auto;
+  align-items: start;
+}
+.contact-info h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 2rem;
+}
+.contact-detail {
+  display: flex; gap: 1rem; align-items: flex-start;
+  margin-bottom: 2rem; padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(212,175,55,0.1);
+}
+.contact-detail:last-of-type { border-bottom: none; }
+.contact-detail-icon {
+  font-size: 1.3rem; color: var(--gold);
+  flex-shrink: 0; margin-top: 2px;
+}
+.contact-detail-text label {
+  font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); display: block; margin-bottom: 0.3rem; font-weight: 600;
+}
+.contact-detail-text p, .contact-detail-text a {
+  font-size: 0.82rem; color: rgba(255,255,255,0.75); line-height: 1.7;
+  text-decoration: none; transition: color 0.3s;
+}
+.contact-detail-text a:hover { color: var(--gold); }
+
+.map-container {
+  position: relative;
+  background: var(--dark3);
+  border: 1px solid rgba(212,175,55,0.15);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.map-container iframe {
+  width: 100%; height: 300px;
+  border: none; display: block;
+  filter: grayscale(80%) contrast(1.1);
+  transition: filter 0.3s;
+}
+.map-container:hover iframe { filter: grayscale(20%) contrast(1.1); }
+
+.contact-form-wrapper h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; margin-bottom: 2rem;
+}
+
+/* ======== FOOTER ======== */
+footer {
+  background: var(--black);
+  border-top: 1px solid rgba(212,175,55,0.15);
+  padding: 4rem 5% 2rem;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem; max-width: 1100px; margin: 0 auto 3rem;
+}
+.footer-brand .logo { display: block; margin-bottom: 1rem; }
+.footer-brand p { font-size: 0.75rem; color: var(--grey); line-height: 1.9; max-width: 280px; margin-bottom: 1.5rem; }
+.social-links { display: flex; gap: 0.75rem; }
+.social-link {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(212,175,55,0.3);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold);
+  text-decoration: none; font-size: 1rem;
+  transition: all 0.3s; cursor: pointer;
+}
+.social-link:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+.footer-col h4 {
+  font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.5rem; font-weight: 700;
+}
+.footer-col a, .footer-col p {
+  display: block; font-size: 0.75rem; color: var(--grey);
+  text-decoration: none; margin-bottom: 0.75rem;
+  line-height: 1.7; transition: color 0.3s; cursor: pointer;
+}
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom {
+  border-top: 1px solid rgba(212,175,55,0.1);
+  padding-top: 2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-bottom p { font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 1px; }
+.footer-bottom span { color: var(--gold); }
+
+/* ======== ANIMATIONS ======== */
+.fade-in {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+.fade-in-delay-4 { transition-delay: 0.4s; }
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 900px) {
+  nav { display: none; }
+  .hamburger { display: flex; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-story { grid-template-columns: 1fr; gap: 3rem; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .booking-form { padding: 2rem; }
+  .booking-section { padding: 100px 5% 3rem; }
+}
+@media (max-width: 600px) {
+  .hero-title { font-size: 2.8rem; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .page-hero h1 { font-size: 2.5rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .services-full-grid { grid-template-columns: 1fr; }
+}
+
+/* Offer banner */
+.top-banner {
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
+  text-align: center; padding: 8px 5%;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 3px; color: var(--black);
+  text-transform: uppercase; position: relative; z-index: 1001;
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Top Banner -->
+<div class="top-banner">🌟 Special Offer: 25% Off for All New Customers! Book Now</div>
+
+<!-- Header -->
+<header id="header">
+  <div class="logo" onclick="showPage('home')">
+    HAIR STORY'S
+    <span>The Unisex Salon</span>
+  </div>
+  <nav>
+    <a onclick="showPage('home')" class="active" id="nav-home">Home</a>
+    <a onclick="showPage('about')" id="nav-about">About</a>
+    <a onclick="showPage('services')" id="nav-services">Services</a>
+    <a onclick="showPage('menu')" id="nav-menu">Menu</a>
+    <a onclick="showPage('booking')" id="nav-booking" class="nav-cta">Book Now</a>
+    <a onclick="showPage('contact')" id="nav-contact">Contact</a>
+  </nav>
+  <div class="hamburger" id="hamburger" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a onclick="showPage('home');toggleMobile()" id="mnav-home">Home</a>
+  <a onclick="showPage('about');toggleMobile()" id="mnav-about">About</a>
+  <a onclick="showPage('services');toggleMobile()" id="mnav-services">Services</a>
+  <a onclick="showPage('menu');toggleMobile()" id="mnav-menu">Menu</a>
+  <a onclick="showPage('booking');toggleMobile()" id="mnav-booking">Book Appointment</a>
+  <a onclick="showPage('contact');toggleMobile()" id="mnav-contact">Contact</a>
+</nav>
+
+<!-- ========== HOME PAGE ========== -->
+<div id="page-home" class="page active">
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-lines">
+      <div class="hero-line"></div>
+      <div class="hero-line"></div>
+      <div class="hero-line"></div>
+    </div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="hero-content">
+      <div class="offer-badge">✨ 25% Off for New Customers</div>
+      <h1 class="hero-title">
+        <span class="gold">Hair</span> Story's<br>
+        Unisex Salon
+      </h1>
+      <div class="hero-divider"></div>
+      <p class="hero-tagline">Where Beauty Meets Style</p>
+      <p class="hero-desc">"Not just a salon — it's your space to relax, glow, and walk out feeling unforgettable."</p>
+      <div class="hero-btns">
+        <button class="btn-gold" onclick="showPage('booking')">Book Appointment</button>
+        <button class="btn-outline" onclick="showPage('menu')">View Menu</button>
+      </div>
+    </div>
+    <div class="hero-scroll" onclick="document.getElementById('stats').scrollIntoView({behavior:'smooth'})">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-section" id="stats">
+    <div class="stats-grid">
+      <div class="stat-item fade-in">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-item fade-in fade-in-delay-1">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Services Offered</div>
+      </div>
+      <div class="stat-item fade-in fade-in-delay-2">
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Customer Rating</div>
+      </div>
+      <div class="stat-item fade-in fade-in-delay-3">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Premium Products</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Services -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-eyebrow">What We Offer</span>
+      <h2 class="section-title">Our <span class="gold">Signature</span> Services</h2>
+      <div class="section-line"></div>
+      <p class="section-sub">From classic cuts to luxurious treatments — every service is crafted with care and expertise.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <span class="service-icon">✂️</span>
+        <h3>Hair Cuts</h3>
+        <p>Precision cuts for men and women, tailored to your face shape and personal style.</p>
+        <span class="service-card-tag">Men & Women</span>
+      </div>
+      <div class="service-card fade-in fade-in-delay-1">
+        <span class="service-icon">💆</span>
+        <h3>Hair Treatments</h3>
+        <p>Deep conditioning, keratin, and nourishing treatments to restore shine and vitality.</p>
+        <span class="service-card-tag">Premium Care</span>
+      </div>
+      <div class="service-card fade-in fade-in-delay-2">
+        <span class="service-icon">🎨</span>
+        <h3>Hair Coloring</h3>
+        <p>Majirel & INOA professional colors for vibrant, long-lasting results with minimal damage.</p>
+        <span class="service-card-tag">Majirel · INOA</span>
+      </div>
+      <div class="service-card fade-in fade-in-delay-3">
+        <span class="service-icon">💅</span>
+        <h3>Nail Bar</h3>
+        <p>Manicure, pedicure, and gel extensions for perfectly polished hands and feet.</p>
+        <span class="service-card-tag">Gel · Pedicure</span>
+      </div>
+      <div class="service-card fade-in">
+        <span class="service-icon">🌿</span>
+        <h3>Facials & Cleanup</h3>
+        <p>O3 facials, de-tan, bleach, and custom cleanup routines for glowing skin.</p>
+        <span class="service-card-tag">O3 · Cleanup</span>
+      </div>
+      <div class="service-card fade-in fade-in-delay-1">
+        <span class="service-icon">✨</span>
+        <h3>Waxing & Threading</h3>
+        <p>Sara, Choco & Reka wax options with gentle threading for smooth, clean results.</p>
+        <span class="service-card-tag">Sara · Choco · Reka</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="testimonial-section">
+    <div class="section-eyebrow" style="display:block;margin-bottom:2rem;">What Clients Say</div>
+    <p class="testimonial-text">
+      "Hair Story's completely transformed my look. The team is incredibly skilled, the ambiance is luxurious, and I left feeling like a completely new person. Absolutely worth every visit!"
+    </p>
+    <div class="hero-divider"></div>
+    <p class="testimonial-author">— Priya S., Regular Client</p>
+  </section>
+
+  <!-- Brand Banner -->
+  <section class="brand-banner">
+    <p>"Not just a salon — it's your space to relax, glow, and walk out feeling unforgettable."</p>
+    <div style="margin-bottom:0.5rem;font-size:0.7rem;letter-spacing:3px;color:rgba(0,0,0,0.6);font-weight:600;text-transform:uppercase;">25% OFF FOR NEW CUSTOMERS</div>
+    <button class="btn-black" onclick="showPage('booking')">Claim Your Offer</button>
+  </section>
+</div>
+
+<!-- ========== ABOUT PAGE ========== -->
+<div id="page-about" class="page">
+  <div class="about-hero">
+    <div class="about-hero-content">
+      <span class="section-eyebrow">Our Story</span>
+      <h1>Where <span class="gold">Beauty</span><br>Meets <em>Soul</em></h1>
+      <div class="hero-divider" style="margin:1.5rem 0;"></div>
+      <p>Born in the heart of Madhapur, Hair Story's is more than just a salon. It's a sanctuary where every client walks in with a vision and leaves with a masterpiece.</p>
+    </div>
+    <div class="page-hero-bg-text">BEAUTY</div>
+  </div>
+
+  <div class="about-story">
+    <div class="about-visual">
+      <div class="about-box">
+        <span class="about-box-icon">💫</span>
+        <h3>Hair Story's</h3>
+        <p>The Unisex Salon</p>
+        <div class="hero-divider" style="margin:1rem auto;"></div>
+        <p style="font-size:0.75rem;color:var(--grey);">Ground Floor, Century Building<br>Silicon Valley, Madhapur<br>Hyderabad, Telangana 500081</p>
+      </div>
+    </div>
+    <div class="about-text">
+      <h2>A Salon Built on <span class="gold">Passion & Craft</span></h2>
+      <p>Hair Story's was founded with a single vision: to create a space where everyone — men, women, and all — could experience the highest level of beauty care in a welcoming, luxurious environment.</p>
+      <p>Located in the vibrant Silicon Valley area of Madhapur, our salon brings together experienced stylists, premium international products, and a warm ambiance that makes every visit feel special.</p>
+      <p>We believe beauty is personal. That's why every service is customized to you — your hair type, your skin tone, your personality. We don't just follow trends; we help you define your own.</p>
+      <button class="btn-gold" onclick="showPage('booking')">Book an Appointment</button>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:0;">
+    <div class="section-header">
+      <span class="section-eyebrow">Why Choose Us</span>
+      <h2 class="section-title">The Hair Story's <span class="gold">Difference</span></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-cards">
+      <div class="about-card fade-in">
+        <span class="about-card-icon">🧼</span>
+        <h3>Strict Hygiene</h3>
+        <p>Every tool sanitized, every surface cleaned. Your safety is our highest priority at every service.</p>
+      </div>
+      <div class="about-card fade-in fade-in-delay-1">
+        <span class="about-card-icon">👑</span>
+        <h3>Expert Stylists</h3>
+        <p>Trained and experienced professionals who stay updated with global beauty trends and techniques.</p>
+      </div>
+      <div class="about-card fade-in fade-in-delay-2">
+        <span class="about-card-icon">🌿</span>
+        <h3>Quality Products</h3>
+        <p>We use only premium, professional-grade brands like Majirel and INOA — gentle on hair, stunning on results.</p>
+      </div>
+      <div class="about-card fade-in fade-in-delay-3">
+        <span class="about-card-icon">💎</span>
+        <h3>Premium Experience</h3>
+        <p>From the moment you walk in to the moment you leave, expect nothing less than extraordinary service.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========== SERVICES PAGE ========== -->
+<div id="page-services" class="page">
+  <div class="page-hero">
+    <div>
+      <span class="section-eyebrow">What We Do</span>
+      <h1>Our <em>Services</em></h1>
+    </div>
+    <div class="page-hero-bg-text">STYLE</div>
+  </div>
+
+  <section class="section" style="padding-top:4rem;">
+    <div class="services-full-grid">
+      <div class="service-full-card fade-in">
+        <span class="icon">✂️</span>
+        <div class="subtitle">Men & Women</div>
+        <h3>Hair Cuts</h3>
+        <p>From classic to contemporary — precision haircuts for every gender and style preference. Our stylists consult with you first to understand your vision, then craft the perfect cut.</p>
+      </div>
+      <div class="service-full-card fade-in fade-in-delay-1">
+        <span class="icon">💆‍♀️</span>
+        <div class="subtitle">Restoration & Care</div>
+        <h3>Hair Treatments</h3>
+        <p>Revive damaged, dull, or frizzy hair with our range of nourishing treatments. Includes deep conditioning, smoothening, and targeted scalp therapies.</p>
+      </div>
+      <div class="service-full-card fade-in fade-in-delay-2">
+        <span class="icon">🌊</span>
+        <div class="subtitle">Smoothening</div>
+        <h3>Keratin Treatment</h3>
+        <p>Say goodbye to frizz permanently. Our professional keratin service leaves hair silky, smooth, and manageable for months, with zero damage to hair structure.</p>
+      </div>
+      <div class="service-full-card fade-in">
+        <span class="icon">🎨</span>
+        <div class="subtitle">Majirel · INOA</div>
+        <h3>Hair Color</h3>
+        <p>Global coverage, highlights, balayage, ombre — using professional Majirel and ammonia-free INOA colors for rich, vibrant, long-lasting results with minimal damage.</p>
+      </div>
+      <div class="service-full-card fade-in fade-in-delay-1">
+        <span class="icon">🧵</span>
+        <div class="subtitle">Precision</div>
+        <h3>Threading</h3>
+        <p>Expert threading for eyebrows, upper lip, and full face shaping. Clean lines, minimal discomfort, and lasting definition.</p>
+      </div>
+      <div class="service-full-card fade-in fade-in-delay-2">
+        <span class="icon">🕯️</span>
+        <div class="subtitle">Sara · Choco · Reka</div>
+        <h3>Waxing</h3>
+        <p>Smooth, clean, and gentle waxing for all body areas. Choose from Sara, Chocolate, or Reka wax options suited to your skin type and sensitivity.</p>
+      </div>
+      <div class="service-full-card fade-in">
+        <span class="icon">💅</span>
+        <div class="subtitle">Hands & Feet</div>
+        <h3>Pedicure & Manicure</h3>
+        <p>Revitalize and beautify your hands and feet with our curated pedicure and manicure treatments, from classic to spa-level luxurious packages.</p>
+      </div>
+      <div class="service-full-card fade-in fade-in-delay-1">
+        <span class="icon">💆</span>
+        <div class="subtitle">Relaxation</div>
+        <h3>Massage</h3>
+        <p>Head, neck, shoulder, and full body massage services designed to relieve stress and rejuvenate your senses. The perfect salon add-on.</p>
+      </div>
+      <div class="service-full-card fade-in fade-in-delay-2">
+        <span class="icon">💎</span>
+        <div class="subtitle">Nail Art</div>
+        <h3>Gel Extensions</h3>
+        <p>Beautiful, long-lasting gel nail extensions crafted to perfection. Available in a wide range of styles, lengths, and custom designs.</p>
+      </div>
+      <div class="service-full-card fade-in">
+        <span class="icon">🌸</span>
+        <div class="subtitle">Glow Up</div>
+        <h3>Facials & O3 Facials</h3>
+        <p>Advanced O3+ facials and custom facial treatments to brighten, hydrate, and transform your skin. Suitable for all skin types.</p>
+      </div>
+      <div class="service-full-card fade-in fade-in-delay-1">
+        <span class="icon">✨</span>
+        <div class="subtitle">Skin Care</div>
+        <h3>Cleanup, De-Tan & Bleach</h3>
+        <p>Refreshing skin cleanups, deep de-tan treatments, and gentle bleaching services to reveal brighter, even-toned skin with minimal downtime.</p>
+      </div>
+      <div class="service-full-card fade-in fade-in-delay-2" style="display:flex;align-items:center;justify-content:center;text-align:center;">
+        <div>
+          <span class="icon" style="font-size:3rem;">🌟</span>
+          <h3 style="margin-bottom:1rem;">25% OFF<br>New Customers</h3>
+          <button class="btn-gold" onclick="showPage('booking')">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========== MENU PAGE ========== -->
+<div id="page-menu" class="page">
+  <div class="page-hero">
+    <div>
+      <span class="section-eyebrow">Pricing</span>
+      <h1><em>Services</em> & Menu</h1>
+    </div>
+    <div class="page-hero-bg-text">MENU</div>
+  </div>
+
+  <div class="menu-section" style="padding-top:3rem;">
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>✂️ Hair Cuts – Men</h3>
+        <span>Precision Styling</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hair Cut</div></div><div class="menu-dots"></div><div class="menu-item-price">₹150</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hair Cut + Wash</div></div><div class="menu-dots"></div><div class="menu-item-price">₹200</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hair Cut + Wash + Blow Dry</div></div><div class="menu-dots"></div><div class="menu-item-price">₹250</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Beard Trim / Shaping</div></div><div class="menu-dots"></div><div class="menu-item-price">₹100</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hair Cut + Beard</div></div><div class="menu-dots"></div><div class="menu-item-price">₹220</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Shave</div></div><div class="menu-dots"></div><div class="menu-item-price">₹80</div></div>
+      </div>
+    </div>
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>✂️ Hair Cuts – Women</h3>
+        <span>Signature Style</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hair Cut (Short)</div></div><div class="menu-dots"></div><div class="menu-item-price">₹250</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hair Cut (Medium)</div></div><div class="menu-dots"></div><div class="menu-item-price">₹350</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hair Cut (Long)</div></div><div class="menu-dots"></div><div class="menu-item-price">₹450</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hair Cut + Wash + Blow Dry</div></div><div class="menu-dots"></div><div class="menu-item-price">₹600</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Fringe / Bangs Cut</div></div><div class="menu-dots"></div><div class="menu-item-price">₹150</div></div>
+      </div>
+    </div>
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>💆 Hair Treatments</h3>
+        <span>Repair & Restore</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Deep Conditioning</div><div class="menu-item-sub">Short Hair</div></div><div class="menu-dots"></div><div class="menu-item-price">₹500</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Deep Conditioning</div><div class="menu-item-sub">Medium Hair</div></div><div class="menu-dots"></div><div class="menu-item-price">₹700</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Deep Conditioning</div><div class="menu-item-sub">Long Hair</div></div><div class="menu-dots"></div><div class="menu-item-price">₹900</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Scalp Treatment</div></div><div class="menu-dots"></div><div class="menu-item-price">₹600</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Olaplex Treatment</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,500</div></div>
+      </div>
+    </div>
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>🌊 Keratin</h3>
+        <span>Frizz-Free Smoothness</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Keratin Treatment</div><div class="menu-item-sub">Short Hair</div></div><div class="menu-dots"></div><div class="menu-item-price">₹3,500</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Keratin Treatment</div><div class="menu-item-sub">Medium Hair</div></div><div class="menu-dots"></div><div class="menu-item-price">₹5,000</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Keratin Treatment</div><div class="menu-item-sub">Long Hair</div></div><div class="menu-dots"></div><div class="menu-item-price">₹7,000</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Nano Keratin</div><div class="menu-item-sub">Short / Medium / Long</div></div><div class="menu-dots"></div><div class="menu-item-price">₹4,000+</div></div>
+      </div>
+    </div>
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>🎨 Hair Color</h3>
+        <span>Majirel · INOA</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Global Color – Majirel</div><div class="menu-item-sub">Short Hair</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,200</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Global Color – Majirel</div><div class="menu-item-sub">Medium Hair</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,800</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Global Color – Majirel</div><div class="menu-item-sub">Long Hair</div></div><div class="menu-dots"></div><div class="menu-item-price">₹2,500</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Global Color – INOA</div><div class="menu-item-sub">Short Hair (Ammonia Free)</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,500</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Global Color – INOA</div><div class="menu-item-sub">Medium Hair</div></div><div class="menu-dots"></div><div class="menu-item-price">₹2,200</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Global Color – INOA</div><div class="menu-item-sub">Long Hair</div></div><div class="menu-dots"></div><div class="menu-item-price">₹3,000</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Highlights / Balayage</div></div><div class="menu-dots"></div><div class="menu-item-price">₹2,000+</div></div>
+      </div>
+    </div>
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>🧵 Threading</h3>
+        <span>Precise Shaping</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Eyebrow Threading</div></div><div class="menu-dots"></div><div class="menu-item-price">₹30</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Upper Lip Threading</div></div><div class="menu-dots"></div><div class="menu-item-price">₹20</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Forehead Threading</div></div><div class="menu-dots"></div><div class="menu-item-price">₹30</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Full Face Threading</div></div><div class="menu-dots"></div><div class="menu-item-price">₹120</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Chin Threading</div></div><div class="menu-dots"></div><div class="menu-item-price">₹20</div></div>
+      </div>
+    </div>
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>🕯️ Waxing</h3>
+        <span>Sara · Choco · Reka</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Full Arms Wax</div><div class="menu-item-sub">Sara / Choco / Reka</div></div><div class="menu-dots"></div><div class="menu-item-price">₹200 / ₹250 / ₹300</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Full Legs Wax</div><div class="menu-item-sub">Sara / Choco / Reka</div></div><div class="menu-dots"></div><div class="menu-item-price">₹350 / ₹400 / ₹450</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Underarms Wax</div></div><div class="menu-dots"></div><div class="menu-item-price">₹100</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Full Body Wax</div><div class="menu-item-sub">Sara / Choco / Reka</div></div><div class="menu-dots"></div><div class="menu-item-price">₹900 / ₹1,100 / ₹1,300</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Face Wax</div></div><div class="menu-dots"></div><div class="menu-item-price">₹150</div></div>
+      </div>
+    </div>
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>💅 Pedicure & Manicure</h3>
+        <span>Hands & Feet</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Basic Manicure</div></div><div class="menu-dots"></div><div class="menu-item-price">₹300</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Classic Manicure</div></div><div class="menu-dots"></div><div class="menu-item-price">₹450</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Spa Manicure</div></div><div class="menu-dots"></div><div class="menu-item-price">₹700</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Basic Pedicure</div></div><div class="menu-dots"></div><div class="menu-item-price">₹350</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Classic Pedicure</div></div><div class="menu-dots"></div><div class="menu-item-price">₹500</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Spa Pedicure</div></div><div class="menu-dots"></div><div class="menu-item-price">₹800</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Mani + Pedi Combo</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,100</div></div>
+      </div>
+    </div>
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>💆 Massage</h3>
+        <span>Relax & Rejuvenate</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Head Massage</div></div><div class="menu-dots"></div><div class="menu-item-price">₹300</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Head + Neck + Shoulder</div></div><div class="menu-dots"></div><div class="menu-item-price">₹500</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Full Body Massage</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,500</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Foot Massage</div></div><div class="menu-dots"></div><div class="menu-item-price">₹400</div></div>
+      </div>
+    </div>
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>💎 Gel Extensions</h3>
+        <span>Nail Art</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Gel Extension (Full Set)</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,500</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Gel Extension + Nail Art</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,800</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Gel Polish</div></div><div class="menu-dots"></div><div class="menu-item-price">₹600</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Gel Removal</div></div><div class="menu-dots"></div><div class="menu-item-price">₹300</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Nail Art (per nail)</div></div><div class="menu-dots"></div><div class="menu-item-price">₹50+</div></div>
+      </div>
+    </div>
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>🌸 Facials</h3>
+        <span>Glow Treatment</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Gold Facial</div></div><div class="menu-dots"></div><div class="menu-item-price">₹800</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Pearl Facial</div></div><div class="menu-dots"></div><div class="menu-item-price">₹700</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Diamond Facial</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,200</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Anti-Aging Facial</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,500</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Brightening Facial</div></div><div class="menu-dots"></div><div class="menu-item-price">₹900</div></div>
+      </div>
+    </div>
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>✨ O3 Facials</h3>
+        <span>Advanced Skincare</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">O3+ Basic Facial</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,000</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">O3+ Brightening</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,200</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">O3+ Anti-Acne</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,300</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">O3+ Anti-Tan</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,100</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">O3+ Hydrating Facial</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,400</div></div>
+      </div>
+    </div>
+
+    <div class="menu-category fade-in">
+      <div class="menu-cat-header">
+        <h3>🌿 Cleanup, De-Tan & Bleach</h3>
+        <span>Skin Brightening</span>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Basic Cleanup</div></div><div class="menu-dots"></div><div class="menu-item-price">₹400</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Deep Cleanup</div></div><div class="menu-dots"></div><div class="menu-item-price">₹600</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Face De-Tan</div></div><div class="menu-dots"></div><div class="menu-item-price">₹350</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Full Body De-Tan</div></div><div class="menu-dots"></div><div class="menu-item-price">₹1,200</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Face Bleach</div></div><div class="menu-dots"></div><div class="menu-item-price">₹250</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Full Body Bleach</div></div><div class="menu-dots"></div><div class="menu-item-price">₹800</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Arms Bleach</div></div><div class="menu-dots"></div><div class="menu-item-price">₹300</div></div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:3rem 0;max-width:900px;margin:0 auto;">
+      <div class="offer-badge">✨ 25% Off for All New Customers — Book Today!</div>
+      <br><br>
+      <button class="btn-gold" onclick="showPage('booking')">Book an Appointment</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== BOOKING PAGE ========== -->
+<div id="page-booking" class="page">
+  <div class="booking-section">
+    <span class="section-eyebrow">Reserve Your Slot</span>
+    <h1>Book an <span class="gold">Appointment</span></h1>
+    <p class="sub">We'll confirm within 30 minutes</p>
+
+    <div class="offer-badge" style="margin-bottom:2rem;display:inline-block;">🎉 New Customer? Claim 25% OFF!</div>
+
+    <form class="booking-form" id="bookingForm" onsubmit="submitBooking(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="b_name" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="b_phone" placeholder="Your mobile number" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="b_email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <select id="b_gender">
+            <option value="">Select...</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Service Required *</label>
+        <select id="b_service" required>
+          <option value="">Select a service...</option>
+          <optgroup label="Hair Services">
+            <option>Hair Cut – Men</option>
+            <option>Hair Cut – Women</option>
+            <option>Hair Treatment</option>
+            <option>Keratin Treatment</option>
+            <option>Hair Color – Majirel</option>
+            <option>Hair Color – INOA</option>
+            <option>Highlights / Balayage</option>
+          </optgroup>
+          <optgroup label="Skin & Beauty">
+            <option>Threading</option>
+            <option>Waxing – Sara</option>
+            <option>Waxing – Choco</option>
+            <option>Waxing – Reka</option>
+            <option>Facial</option>
+            <option>O3 Facial</option>
+            <option>Cleanup</option>
+            <option>De-Tan</option>
+            <option>Bleach</option>
+          </optgroup>
+          <optgroup label="Nails & Body">
+            <option>Manicure</option>
+            <option>Pedicure</option>
+            <option>Mani + Pedi Combo</option>
+            <option>Gel Extensions</option>
+            <option>Nail Art</option>
+            <option>Massage</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Preferred Date *</label>
+          <input type="date" id="b_date" required>
+        </div>
+        <div class="form-group">
+          <label>Preferred Time *</label>
+          <select id="b_time" required>
+            <option value="">Select time...</option>
+            <option>10:00 AM</option>
+            <option>11:00 AM</option>
+            <option>12:00 PM</option>
+            <option>01:00 PM</option>
+            <option>02:00 PM</option>
+            <option>03:00 PM</option>
+            <option>04:00 PM</option>
+            <option>05:00 PM</option>
+            <option>06:00 PM</option>
+            <option>07:00 PM</option>
+            <option>08:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Special Notes</label>
+        <textarea id="b_notes" placeholder="Any specific requirements or notes for your appointment..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Confirm Booking</button>
+    </form>
+
+    <div style="margin-top:2rem;text-align:center;">
+      <p style="font-size:0.75rem;color:var(--grey);">Or call us directly: <a href="tel:9985045454" style="color:var(--gold);text-decoration:none;font-weight:600;">📞 9985045454</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ========== CONTACT PAGE ========== -->
+<div id="page-contact" class="page">
+  <div class="contact-section">
+    <div style="text-align:center;margin-bottom:4rem;">
+      <span class="section-eyebrow">Get in Touch</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:400;">
+        Visit <span class="gold"><em>Hair Story's</em></span>
+      </h1>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Find <span class="gold">Us</span></h2>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div class="contact-detail-text">
+            <label>Address</label>
+            <p>Ground Floor, Century Building<br>Plot No. 21–22, Rohini Layout Road<br>Opp. Cyber Towers, Beside Max Vision<br>Silicon Valley, Madhapur<br>Hyderabad, Telangana 500081</p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📞</div>
+          <div class="contact-detail-text">
+            <label>Phone</label>
+            <a href="tel:9985045454">+91 99850 45454</a>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🕐</div>
+          <div class="contact-detail-text">
+            <label>Working Hours</label>
+            <p>Monday – Sunday<br>10:00 AM – 9:00 PM</p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🗺️</div>
+          <div class="contact-detail-text">
+            <label>Google Maps</label>
+            <a href="https://maps.app.goo.gl/adAjFXecmtERoyht9" target="_blank">Open in Google Maps →</a>
+          </div>
+        </div>
+
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.4!2d78.3827!3d17.4474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDI2JzUwLjYiTiA3OMKwMjInNTcuNyJF!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin"
+            allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="contact-form-wrapper">
+        <h3>Send an <span class="gold">Enquiry</span></h3>
+        <form class="booking-form" style="padding:2.5rem;" onsubmit="submitEnquiry(event)">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="e_name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label>Phone *</label>
+            <input type="tel" id="e_phone" placeholder="Mobile number" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="e_email" placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <select id="e_subject">
+              <option>General Enquiry</option>
+              <option>Service Information</option>
+              <option>Pricing Query</option>
+              <option>Appointment Rescheduling</option>
+              <option>Feedback</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message *</label>
+            <textarea id="e_message" placeholder="Your message..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo" onclick="showPage('home')" style="margin-bottom:0.3rem;">HAIR STORY'S<span>The Unisex Salon</span></div>
+      <p>Your space to relax, glow, and walk out feeling unforgettable. Premium salon experience in the heart of Madhapur, Hyderabad.</p>
+      <div class="social-links">
+        <a class="social-link" href="#" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a class="social-link" href="#" title="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('about')">About Us</a>
+      <a onclick="showPage('services')">Services</a>
+      <a onclick="showPage('menu')">Menu & Pricing</a>
+      <a onclick="showPage('booking')">Book Appointment</a>
+      <a onclick="showPage('contact')">Contact Us</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:9985045454">📞 9985045454</a>
+      <p>📍 Ground Floor, Century Building<br>Silicon Valley, Madhapur<br>Hyderabad – 500081</p>
+      <a href="https://maps.app.goo.gl/adAjFXecmtERoyht9" target="_blank">🗺️ View on Maps</a>
+      <p>🕐 10AM – 9PM, All Days</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 <span>Hair Story's – The Unisex Salon</span>. All Rights Reserved.</p>
+    <p>Designed with <span>♥</span> for beauty</p>
+  </div>
+</footer>
+
+<!-- Booking Popup -->
+<div class="popup-overlay" id="bookingPopup">
+  <div class="popup">
+    <span class="popup-icon">✅</span>
+    <h3>Booking Sent!</h3>
+    <p>Your booking details have been sent to us via <strong style="color:var(--gold);">WhatsApp</strong>. Our team will confirm your appointment shortly.</p>
+    <p style="color:var(--gold);font-weight:600;font-size:0.75rem;">📞 9985045454</p>
+    <br>
+    <button class="popup-close" onclick="closePopup()">Done</button>
+  </div>
+</div>
+
+<!-- Enquiry Popup -->
+<div class="popup-overlay" id="enquiryPopup">
+  <div class="popup">
+    <span class="popup-icon">📨</span>
+    <h3>Message Sent!</h3>
+    <p>We've received your enquiry. Our team will get back to you within 24 hours.</p>
+    <br>
+    <button class="popup-close" onclick="closeEnquiryPopup()">Okay</button>
+  </div>
+</div>
+
+<script>
+// ===== CURSOR =====
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+});
+
+function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px)`;
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.addEventListener('mousedown', () => { cursor.style.transform += ' scale(0.5)'; ring.style.transform += ' scale(1.5)'; });
+document.addEventListener('mouseup', () => {});
+
+// ===== HEADER SCROLL =====
+window.addEventListener('scroll', () => {
+  const h = document.getElementById('header');
+  if (window.scrollY > 50) h.classList.add('scrolled');
+  else h.classList.remove('scrolled');
+});
+
+// ===== PAGE NAVIGATION =====
+function showPage(page) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // Show target
+  const target = document.getElementById('page-' + page);
+  if (target) { target.classList.add('active'); }
+  // Update nav
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + page);
+  if (navEl) navEl.classList.add('active');
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Trigger fade-ins
+  setTimeout(initFadeIns, 100);
+}
+
+// ===== MOBILE NAV =====
+function toggleMobile() {
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('mobileNav');
+  ham.classList.toggle('open');
+  nav.classList.toggle('open');
+}
+
+// ===== SCROLL ANIMATIONS =====
+function initFadeIns() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in:not(.visible)').forEach(el => observer.observe(el));
+}
+initFadeIns();
+window.addEventListener('scroll', initFadeIns);
+
+// ===== WHATSAPP NUMBER =====
+const WA_NUMBER = '919985045454'; // +91 9985045454
+
+// ===== BOOKING FORM → WHATSAPP =====
+function submitBooking(e) {
+  e.preventDefault();
+
+  const name    = document.getElementById('b_name').value.trim();
+  const phone   = document.getElementById('b_phone').value.trim();
+  const email   = document.getElementById('b_email').value.trim();
+  const gender  = document.getElementById('b_gender').value;
+  const service = document.getElementById('b_service').value;
+  const date    = document.getElementById('b_date').value;
+  const time    = document.getElementById('b_time').value;
+  const notes   = document.getElementById('b_notes').value.trim();
+
+  const msg =
+`💇 *NEW BOOKING – Hair Story's*
+━━━━━━━━━━━━━━━━━━
+👤 *Name:* ${name}
+📞 *Phone:* ${phone}
+${email ? `📧 *Email:* ${email}\n` : ''}${gender ? `🧍 *Gender:* ${gender}\n` : ''}💆 *Service:* ${service}
+📅 *Date:* ${date}
+⏰ *Time:* ${time}
+${notes ? `📝 *Notes:* ${notes}\n` : ''}━━━━━━━━━━━━━━━━━━
+🎉 *25% Off – New Customer Offer Applied!*`;
+
+  const waURL = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+  window.open(waURL, '_blank');
+
+  // Show success popup
+  document.getElementById('bookingPopup').classList.add('active');
+  e.target.reset();
+}
+
+function closePopup() {
+  document.getElementById('bookingPopup').classList.remove('active');
+}
+
+// ===== ENQUIRY FORM → WHATSAPP =====
+function submitEnquiry(e) {
+  e.preventDefault();
+
+  const name    = document.getElementById('e_name').value.trim();
+  const phone   = document.getElementById('e_phone').value.trim();
+  const email   = document.getElementById('e_email').value.trim();
+  const subject = document.getElementById('e_subject').value;
+  const message = document.getElementById('e_message').value.trim();
+
+  const msg =
+`📩 *NEW ENQUIRY – Hair Story's*
+━━━━━━━━━━━━━━━━━━
+👤 *Name:* ${name}
+📞 *Phone:* ${phone}
+${email ? `📧 *Email:* ${email}\n` : ''}📌 *Subject:* ${subject}
+💬 *Message:* ${message}
+━━━━━━━━━━━━━━━━━━`;
+
+  const waURL = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+  window.open(waURL, '_blank');
+
+  document.getElementById('enquiryPopup').classList.add('active');
+  e.target.reset();
+}
+
+function closeEnquiryPopup() {
+  document.getElementById('enquiryPopup').classList.remove('active');
+}
+
+// Close popup on overlay click
+document.getElementById('bookingPopup').addEventListener('click', function(e) {
+  if (e.target === this) closePopup();
+});
+document.getElementById('enquiryPopup').addEventListener('click', function(e) {
+  if (e.target === this) closeEnquiryPopup();
+});
+
+// ===== SET MIN DATE =====
+const dateInputs = document.querySelectorAll('input[type="date"]');
+const today = new Date().toISOString().split('T')[0];
+dateInputs.forEach(d => d.setAttribute('min', today));
+
+// ===== COUNTER ANIMATION =====
+function animateCounters() {
+  const counters = document.querySelectorAll('.stat-num');
+  counters.forEach(counter => {
+    const text = counter.innerText;
+    const num = parseInt(text.replace(/\D/g, ''));
+    if (!num) return;
+    let current = 0;
+    const increment = num / 60;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= num) {
+        current = num;
+        clearInterval(timer);
+      }
+      counter.innerText = text.replace(/\d+/, Math.floor(current));
+    }, 25);
+  });
+}
+
+const statsObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { animateCounters(); statsObs.disconnect(); } });
+}, { threshold: 0.5 });
+
+const statsSection = document.querySelector('.stats-section');
+if (statsSection) statsObs.observe(statsSection);
+
+// ===== GOLD TEXT CLASS =====
+document.querySelectorAll('.about-text .gold, .section-title .gold').forEach(el => {
+  el.style.color = 'var(--gold)';
+});
+</script>
+</body>
+</html>
